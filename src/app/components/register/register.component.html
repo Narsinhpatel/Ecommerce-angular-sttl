@@ -1,0 +1,71 @@
+<div class="container mt-5">
+  <div class="mx-auto custom-card w-1/2 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <h2 class="text-center text-2xl font-bold mb-3">Registration Form</h2>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <div class="mb-4">
+        <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+        <input id="username" name="username" type="text" formControlName="username"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          required>
+        <div *ngIf="registrationForm.get('username')!.invalid && (registrationForm.get('username')!.dirty || registrationForm.get('username')!.touched)"
+          class="text-red-500 text-sm mt-1">
+          <div *ngIf="registrationForm.get('username')!.hasError('required')">Username is required</div>
+          <div *ngIf="registrationForm.get('username')!.hasError('maxlength')">Username cannot be more than 10 characters</div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <input id="email" name="email" type="email" formControlName="email"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          required>
+        <div *ngIf="registrationForm.get('email')!.invalid && (registrationForm.get('email')!.dirty || registrationForm.get('email')!.touched)"
+          class="text-red-500 text-sm mt-1">
+          <div *ngIf="registrationForm.get('email')!.hasError('required')">Email is required</div>
+          <div *ngIf="registrationForm.get('email')!.hasError('email')">Invalid email address</div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+        <input id="password" name="password" type="password" formControlName="password"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          required>
+        <div *ngIf="registrationForm.get('password')!.invalid && (registrationForm.get('password')!.dirty || registrationForm.get('password')!.touched)"
+          class="text-red-500 text-sm mt-1">
+          <div *ngIf="registrationForm.get('password')!.hasError('required')">Password is required</div>
+          <div *ngIf="registrationForm.get('password')!.hasError('minlength')">Password must be at least 6 characters</div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+        <select id="gender" name="gender" formControlName="gender"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          required>
+          <option value="" disabled>Select gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+        <div *ngIf="registrationForm.get('gender')!.invalid && (registrationForm.get('gender')!.dirty || registrationForm.get('gender')!.touched)"
+          class="text-red-500 text-sm mt-1">Gender is required</div>
+      </div>
+
+      <div class="mb-4">
+        <label for="bio" class="block text-sm font-medium text-gray-700">Bio</label>
+        <textarea id="bio" name="bio" formControlName="bio"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+      </div>
+
+      <div class="text-center">
+        <button type="submit"
+          class="w-full bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          Register
+        </button>
+      </div>
+    </form>
+    <p class="text-center mt-3">Already have an account? <a routerLink="/login"
+        class="text-indigo-600 hover:text-indigo-700">Login</a></p>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 m-10">
+      <!-- Delivery Details Form -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+          <h2 class="text-lg font-semibold leading-7 text-gray-900 mb-4">Delivery Details</h2>
+          <div class="grid grid-cols-1 gap-y-4">
+            <input type="text" formControlName="name" placeholder="Full Name" class="input-field">
+            <input type="text" formControlName="phone" placeholder="Phone Number" class="input-field">
+            <input type="text" formControlName="street" placeholder="Street Address" class="input-field">
+            <input type="text" formControlName="city" placeholder="City" class="input-field">
+            <input type="text" formControlName="state" placeholder="State / Province" class="input-field">
+            <input type="text" formControlName="pinCode" placeholder="ZIP / Postal code" class="input-field">
+          </div>
+  
+          <!-- Payment Method -->
+          <div class="mt-6">
+            <h2 class="text-lg font-semibold leading-7 text-gray-900 mb-4">Payment Method</h2>
+            <div class="flex items-center gap-4">
+              <label class="inline-flex items-center">
+                <input type="radio" value="cash" [checked]="selectedPayment === 'cash'" (change)="handlePaymentChange('cash')" class="form-radio h-5 w-5 text-indigo-600">
+                <span class="ml-2 text-gray-900">Cash on Delivery</span>
+              </label>
+              <label class="inline-flex items-center">
+                <input type="radio" value="cheque" [checked]="selectedPayment === 'cheque'" (change)="handlePaymentChange('cheque')" class="form-radio h-5 w-5 text-indigo-600">
+                <span class="ml-2 text-gray-900">Cheque</span>
+              </label>
+            </div>
+          </div>
+  
+          <!-- Place Order Button -->
+          <div class="mt-6 flex justify-end">
+            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              Place Order
+            </button>
+          </div>
+        </form>
+      </div>
+  
+      <!-- Cart Summary -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-lg font-semibold leading-7 text-gray-900 mb-4">Cart Summary</h2>
+        <table class="w-full">
+          <thead>
+            <tr>
+              <th class="text-left px-4 py-2">Product</th>
+              <th class="text-left px-4 py-2">Quantity</th>
+              <th class="text-right px-4 py-2">Price</th>
+              <th class="text-right px-4 py-2">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of items">
+              <td class="text-left px-4 py-2">
+                <img [src]="item.product.image" [alt]="item.product.name" class="h-12 w-12 object-contain">
+                {{ item.product.name }}
+              </td>
+              <td class="text-left px-4 py-2">{{ item.quantity }}</td>
+              <td class="text-right px-4 py-2">${{ item.product.price.toFixed(2) }}</td>
+              <td class="text-right px-4 py-2">${{ (item.product.price * item.quantity).toFixed(2) }}</td>
+            </tr>
+            <tr class="border-t border-gray-200">
+              <td colspan="3" class="text-right font-semibold px-4 py-2">Total:</td>
+              <td class="text-right px-4 py-2">${{ calculateTotalAmount().toFixed(2) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
